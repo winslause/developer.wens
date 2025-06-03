@@ -1,0 +1,2955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Classic Photography - Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: transparent;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .live-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+        .live-background .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1);
+            transform-origin: center;
+        }
+        .live-background .bg-image.active {
+            opacity: 1;
+            animation: kenburns 12s infinite;
+        }
+        .live-background .bg-image .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+        }
+        .navbar {
+            background: transparent !important;
+            backdrop-filter: none;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #fff !important;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .nav-link {
+            color: #fff !important;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            position: relative;
+        }
+        .nav-link i {
+            transition: transform 0.3s;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            color: #f1c40f;
+        }
+        .nav-link:nth-child(2) i { color: #e74c3c; }
+        .nav-link:nth-child(3) i { color: #3498db; }
+        .nav-link:nth-child(4) i { color: #e67e22; }
+        .nav-link:hover i {
+            transform: scale(1.2);
+        }
+        .nav-link .tooltip-text {
+            visibility: hidden;
+            background-color: #fff;
+            color: #333;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1000;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        @media (max-width: 991px) {
+            .navbar-nav {
+                background: rgba(0, 0, 0, 0.8);
+                padding: 15px;
+                border-radius: 10px;
+            }
+            .nav-link {
+                text-align: center;
+                margin: 10px 0;
+            }
+            .nav-link .tooltip-text {
+                bottom: auto;
+                top: 50%;
+                left: 60px;
+                transform: translateY(-50%);
+            }
+        }
+        .header-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+        }
+        .header-section .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+        .header-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            animation: fadeInDown 1s ease-in-out;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .header-section p {
+            font-size: 1.5rem;
+            animation: fadeInDown 1s ease-in-out 0.2s;
+            animation-fill-mode: both;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            background-color: #f8f9fa;
+            overflow: visible;
+            min-height: 100vh;
+        }
+        /* Ensure all sections are visible */
+        .user-flow-section, .timeline-section, .spotlight-section, .trending-section, .services-section, .reviews-section, footer {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            min-height: 100px;
+            position: relative;
+            z-index: 2;
+        }
+        /* AOS Fallback */
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+        [data-aos].aos-animate {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        /* User Flow Section */
+        .user-flow-section {
+            padding: 50px 0;
+            background: linear-gradient(135deg, #2c3e50, #1a3c6d);
+            color: white;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+        .user-flow-section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #f1c40f;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            animation: pulseText 2s infinite;
+        }
+        .user-flow-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .user-flow-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .user-flow-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #fff;
+            animation: slideInLeft 1s ease-out;
+        }
+        .user-flow-card p {
+            color: #ddd;
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+        .user-flow-card .btn {
+            background: linear-gradient(45deg, #f1c40f, #e67e22);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: transform 0.3s, background 0.3s;
+            animation: bounceIn 1s ease-out;
+            margin-top: 20px;
+        }
+        .user-flow-card .btn:hover {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            transform: translateY(-2px) scale(1.05);
+        }
+        .user-flow-section .row {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+        .user-flow-section .col-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        @media (max-width: 768px) {
+            .user-flow-section .col-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+                padding: 0 10px;
+            }
+            .user-flow-card {
+                padding: 20px;
+            }
+            .user-flow-card h3 {
+                font-size: 1.4rem;
+            }
+            .user-flow-card p {
+                font-size: 0.85rem;
+            }
+            .user-flow-card .btn {
+                font-size: 0.9rem;
+                padding: 8px 20px;
+            }
+        }
+        /* Collaboration Timeline Section */
+        .timeline-section {
+            padding: 50px 0;
+            background: #fff;
+        }
+        .timeline-section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a3c6d;
+            animation: pulseText 2s infinite;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: #f1c40f;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: growLine 2s ease-in-out;
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+        .timeline-item.left {
+            left: 0;
+        }
+        .timeline-item.right {
+            left: 50%;
+        }
+        .timeline-item .content {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .timeline-item .content:hover {
+            transform: scale(1.05);
+        }
+        .timeline-item .content h4 {
+            font-size: 1.5rem;
+            color: #1a3c6d;
+            margin-bottom: 10px;
+        }
+        .timeline-item .content p {
+            color: #555;
+            font-size: 1rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #f1c40f;
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+            animation: pulseDot 1.5s infinite;
+        }
+        .timeline-item.left::before {
+            right: -10px;
+        }
+        .timeline-item.right::before {
+            left: -10px;
+        }
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 20px;
+            }
+            .timeline-item.right {
+                left: 0;
+            }
+            .timeline-item::before {
+                left: 10px;
+            }
+        }
+        /* Trending Talent Section */
+        .trending-section {
+            padding: 50px 0;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+        .trending-section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #f1c40f;
+            animation: pulseText 2s infinite;
+        }
+        .trending-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .trending-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .trending-card img {
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .trending-card:hover img {
+            transform: scale(1.1);
+        }
+        .trending-card .card-body {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .trending-card .card-title {
+            font-size: 1.4rem;
+            color: #1a3c6d;
+            margin-bottom: 8px;
+        }
+        .trending-card .card-text {
+            color: #555;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+        .trending-card .btn {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+        }
+        .trending-section .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        @media (min-width: 992px) {
+            .trending-section .col-lg-3 {
+                flex: 0 0 25%;
+                max-width: 25%;
+                padding: 0 10px;
+            }
+        }
+        @media (max-width: 991px) {
+            .trending-section .col-lg-3 {
+                flex: 0 0 50%;
+                max-width: 50%;
+                padding: 0 10px;
+            }
+            .trending-card img {
+                height: 120px;
+            }
+            .trending-card .card-title {
+                font-size: 1.2rem;
+            }
+            .trending-card .card-text {
+                font-size: 0.8rem;
+            }
+            .trending-card .btn {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+        /* Spotlight Section */
+        .spotlight-section {
+            padding: 50px 0;
+            background: #fff;
+        }
+        .spotlight-section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a3c6d;
+            animation: pulseText 2s infinite;
+        }
+        .spotlight-carousel .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.5s ease;
+        }
+        .spotlight-carousel .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+        .spotlight-carousel .carousel-caption {
+            background: rgba(0,0,0,0.7);
+            border-radius: 10px;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        .spotlight-carousel .carousel-caption h5 {
+            font-size: 1.8rem;
+            color: #f1c40f;
+        }
+        .spotlight-carousel .carousel-caption p {
+            color: #ddd;
+            font-size: 1rem;
+        }
+        /* Services Section - Carousel */
+        .services-section {
+            padding: 50px 0;
+            background: linear-gradient(135deg, #1a3c6d, #2c3e50);
+            color: white;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+        .services-section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f1c40f;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            animation: pulseText 2s infinite;
+        }
+        .services-section p.lead {
+            font-size: 1.3rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #ddd;
+            animation: fadeIn 1s ease-out;
+        }
+        .services-carousel .carousel-item {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .service-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 300px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover {
+            transform: translateY(-12px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .service-card img {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+        .service-card .card-body {
+            padding: 20px;
+            background: linear-gradient(180deg, #fff, #f8f9fa);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card .card-title {
+            font-size: 1.6rem;
+            color: #1a3c6d;
+            margin-bottom: 10px;
+        }
+        .service-card .card-text {
+            color: #555;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+        .service-card .price {
+            color: #e74c3c;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .service-card .btn-primary {
+            border-radius: 25px;
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #f1c40f, #e67e22);
+            border: none;
+            font-weight: 500;
+            transition: transform 0.3s, background 0.3s;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .service-card .btn-primary:hover {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .service-card img {
+                height: 180px;
+            }
+            .service-card .card-title {
+
+            font-size: 1.3rem;
+        }
+        .service-card .card-text {
+            font-size: 0.85rem;
+        }
+        .service-card .price {
+            font-size: 1.1rem;
+        }
+        .service-card .btn-primary {
+            font-size: 0.85rem;
+            padding: 7px 18px;
+        }
+    }
+    /* Carousel Indicators and Controls */
+    .services-carousel .carousel-indicators,
+    .reviews-carousel .carousel-indicators {
+        position: relative;
+        margin-top: 20px;
+    }
+    .services-carousel .carousel-indicators button,
+    .reviews-carousel .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #ddd;
+        border: none;
+        margin: 0 5px;
+        transition: background-color 0.3s;
+    }
+    .services-carousel .carousel-indicators button.active,
+    .reviews-carousel .carousel-indicators button.active {
+        background-color: #f1c40f;
+    }
+    .services-carousel .carousel-control-prev,
+    .services-carousel .carousel-control-next,
+    .reviews-carousel .carousel-control-prev,
+    .reviews-carousel .carousel-control-next {
+        width: 60px;
+        height: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(26,60,109,0.7);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+    }
+    .services-carousel .carousel-control-prev:hover,
+    .services-carousel .carousel-control-next:hover,
+    .reviews-carousel .carousel-control-prev:hover,
+    .reviews-carousel .carousel-control-next:hover {
+        background: rgba(26,60,109,1);
+    }
+    .services-carousel .carousel-control-prev-icon,
+    .services-carousel .carousel-control-next-icon,
+    .reviews-carousel .carousel-control-prev-icon,
+    .reviews-carousel .carousel-control-next-icon {
+        background: none;
+        font-size: 2rem;
+        color: #f1c40f;
+    }
+    .services-carousel .carousel-control-prev-icon::before,
+    .reviews-carousel .carousel-control-prev-icon::before {
+        content: '\f053';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+    }
+    .services-carousel .carousel-control-next-icon::before,
+    .reviews-carousel .carousel-control-next-icon::before {
+        content: '\f054';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+    }
+    /* View More Button */
+    .view-more-btn {
+        display: block;
+        margin: 40px auto 20px;
+        padding: 15px 40px;
+        background: linear-gradient(45deg, #f1c40f, #e67e22);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        max-width: 300px;
+        text-align: center;
+    }
+    .view-more-btn:hover {
+        background: linear-gradient(45deg, #e67e22, #d35400);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    /* Reviews Section - Vertical Slideshow */
+    .reviews-section {
+        padding: 50px 0;
+        background: #f8f9fa;
+    }
+    .reviews-section h2 {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #1a3c6d;
+        animation: pulseText 2s infinite;
+    }
+    .reviews-carousel .carousel-inner {
+        overflow: visible;
+    }
+    .reviews-carousel .carousel-item {
+        transition: transform 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 300px;
+    }
+    .reviews-carousel .carousel-item .row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .review-card {
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        background: #fff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 10px;
+    }
+    .review-card:hover {
+        transform: translateY(-5px) rotate(1deg);
+    }
+    .review-card .rating {
+        color: #f1c40f;
+        font-size: 1.1rem;
+    }
+    .review-card .card-text {
+        color: #555;
+        font-size: 0.9rem;
+        flex-grow: 1;
+    }
+    .review-card .provider {
+        font-size: 0.85rem;
+        color: #555;
+    }
+    @media (min-width: 768px) {
+        .reviews-carousel .carousel-item .row .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 0 10px;
+        }
+    }
+    @media (max-width: 767px) {
+        .reviews-carousel .carousel-item .row .col-md-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+        .review-card {
+            padding: 12px;
+        }
+        .review-card .rating {
+            font-size: 1rem;
+        }
+        .review-card .card-text {
+            font-size: 0.85rem;
+        }
+        .review-card .provider {
+            font-size: 0.8rem;
+        }
+    }
+    /* Floating Sidebar */
+    .floating-sidebar {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        z-index: 1000;
+        overflow: hidden;
+        transition: width 0.3s, height 0.3s;
+    }
+    .floating-sidebar.open {
+        width: 50%;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        background: rgba(26,60,109,0.95);
+        backdrop-filter: blur(12px);
+        border-radius: 0;
+        overflow-y: auto;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    }
+    .sidebar-content {
+        padding: 20px;
+        color: #fff;
+        display: none;
+    }
+    .floating-sidebar.open .sidebar-content {
+        display: block;
+        opacity: 1;
+    }
+    .sidebar-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #f1c40f;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        cursor: pointer;
+        z-index: 1001;
+        transition: transform 0.3s;
+    }
+    .sidebar-toggle:hover {
+        transform: scale(1.1);
+    }
+    .sidebar-toggle i {
+        font-size: 1.8rem;
+        color: #1a3c6d;
+    }
+    .floating-sidebar.open .sidebar-toggle {
+        display: none;
+    }
+    .sidebar-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.8rem;
+        color: #f1c40f;
+        cursor: pointer;
+        transition: transform 0.3s;
+        z-index: 1002;
+    }
+    .sidebar-close:hover {
+        transform: rotate(90deg);
+    }
+    .sidebar-section {
+        margin-bottom: 30px;
+    }
+    .sidebar-section h4 {
+        font-size: 1.3rem;
+        color: #f1c40f;
+        margin-bottom: 15px;
+    }
+    .how-it-works .step {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        background: rgba(255,255,255,0.1);
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .how-it-works .step img {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+    .how-it-works .step p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    .categories a {
+        display: block;
+        color: #ddd;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+        transition: color 0.3s, transform 0.3s;
+    }
+    .categories a:hover {
+        color: #f1c40f;
+        transform: translateX(5px);
+    }
+    .featured-creators .carousel-inner .carousel-item {
+        transition: transform 0.5s ease;
+    }
+    .featured-creators .creator {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+    }
+    .featured-creators img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin-right: 15px;
+        border: 2px solid #f1c40f;
+    }
+    .featured-creators p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    .testimonials .testimonial {
+        background: rgba(255,255,255,0.15);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .testimonials img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+    .testimonials p {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+    .portfolio-previews .gallery {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .portfolio-previews img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+    .portfolio-previews img:hover {
+        transform: scale(1.1);
+    }
+    .trust-signals {
+        text-align: center;
+    }
+    .trust-signals img {
+        width: 70px;
+        margin: 10px;
+        filter: grayscale(80%);
+        transition: filter 0.3s, opacity 0.3s;
+        opacity: 0.8;
+    }
+    .trust-signals img:hover {
+        filter: grayscale(0);
+        opacity: 1;
+    }
+    .trust-signals .badge {
+        display: block;
+        background: #f1c40f;
+        color: #1a3c6d;
+        padding: 8px 15px;
+        border-radius: 20px;
+        margin: 10px 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    @media (max-width: 768px) {
+        .floating-sidebar.open {
+            width: 100%;
+            height: 80vh;
+            top: auto;
+            bottom: 0;
+        }
+        .sidebar-content {
+            max-height: 80vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .sidebar-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .sidebar-content::-webkit-scrollbar-thumb {
+            background: #f1c40f;
+            border-radius: 4px;
+        }
+        .sidebar-content::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        .how-it-works .step p {
+            font-size: 0.85rem;
+        }
+        .categories a {
+            font-size: 0.85rem;
+        }
+        .featured-creators p {
+            font-size: 0.8rem;
+        }
+        .testimonials p {
+            font-size: 0.8rem;
+        }
+        .trust-signals .badge {
+            font-size: 0.8rem;
+        }
+    }
+    /* Footer */
+    footer {
+        background: #1a3c6d;
+        color: white;
+        padding: 50px 0;
+    }
+    footer a {
+        color: #ddd;
+        transition: color 0.3s;
+    }
+    footer a:hover {
+        color: #f1c40f;
+    }
+    /* Animations */
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes kenburns {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    @keyframes pulseText {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    @keyframes growLine {
+        0% { height: 0; }
+        100% { height: 100%; }
+    }
+    @keyframes pulseDot {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { opacity: 1; transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @media (max-width: 768px) {
+        .services-section h2, .user-flow-section h2, .timeline-section h2, .trending-section h2, .spotlight-section h2, .reviews-section h2 {
+            font-size: 2.2rem;
+        }
+        .header-section h1 {
+            font-size: 2.5rem;
+        }
+        .header-section p {
+            font-size: 1.2rem;
+        }
+        .spotlight-carousel .carousel-item img {
+            height: 300px;
+        }
+        .user-flow-section, .timeline-section, .spotlight-section, .trending-section, .services-section, .reviews-section, footer {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    }
+    /* About Us Section - Slideshow */
+.services-section {
+    padding: 50px 0;
+    background: linear-gradient(135deg, #1a3c6d, #2c3e50);
+    color: white;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+}
+.services-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f1c40f;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    animation: pulseText 2s infinite;
+}
+.services-section p.lead {
+    font-size: 1.3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #ddd;
+    animation: fadeIn 1s ease-out;
+}
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.75s ease-in-out;
+}
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+.about-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    max-width: 350px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.about-card:hover {
+    transform: translateY(-12px) rotate(2deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+.about-card img {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.about-card:hover img {
+    transform: scale(1.1);
+}
+.about-card .card-body {
+    padding: 20px;
+    background: linear-gradient(180deg, #fff, #f8f9fa);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.about-card .card-title {
+    font-size: 1.6rem;
+    color: #1a3c6d;
+    margin-bottom: 10px;
+}
+.about-card .card-text {
+    color: #555;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+.about-card .team-info {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 10px 0;
+}
+.about-card .btn-primary {
+    border-radius: 25px;
+    padding: 8px 20px;
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    border: none;
+    font-weight: 500;
+    transition: transform 0.3s, background 0.3s;
+    font-size: 0.9rem;
+    align-self: center;
+}
+.about-card .btn-primary:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+}
+.carousel-control-prev,
+.carousel-control-next {
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(26,60,109,0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(26,60,109,1);
+}
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+    content: '\f053';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 2rem;
+    color: #f1c40f;
+}
+.carousel-control-next-icon::before {
+    content: '\f054';
+}
+@media (max-width: 768px) {
+    .about-card img {
+        height: 180px;
+    }
+    .about-card .card-title {
+        font-size: 1.4rem;
+    }
+    .about-card .card-text {
+        font-size: 0.9rem;
+    }
+    .about-card .team-info {
+        font-size: 0.85rem;
+    }
+    .about-card .btn-primary {
+        font-size: 0.85rem;
+        padding: 7px 18px;
+    }
+}
+/* Spotlight Section */
+.spotlight-section {
+    padding: 50px 0; /* important: vertical spacing */
+    background: #fff; /* important: section background color */
+}
+
+.spotlight-section h2 {
+    font-size: 2.8rem; /* important: headline size */
+    text-align: center; /* important: headline alignment */
+    margin-bottom: 40px; /* important: spacing under headline */
+    color: #1a3c6d; /* important: headline color */
+    animation: pulseText 2s infinite; /* important: animated effect */
+}
+
+.spotlight-carousel .carousel-item img {
+    height: 400px; /* important: image height */
+    object-fit: cover; /* important: image fitting */
+    border-radius: 15px; /* important: image styling */
+    transition: transform 0.5s ease; /* important: smooth zoom effect */
+}
+
+.spotlight-carousel .carousel-item:hover img {
+    transform: scale(1.05); /* important: hover zoom effect */
+}
+
+.spotlight-carousel .carousel-caption {
+    background: rgba(0,0,0,0.7); /* important: caption background */
+    border-radius: 10px; /* important: caption styling */
+    padding: 20px; /* important: caption spacing */
+    animation: fadeInUp 1s ease-out; /* important: entrance animation */
+}
+
+.spotlight-carousel .carousel-caption h5 {
+    font-size: 1.8rem; /* important: caption headline size */
+    color: #f1c40f; /* important: caption headline color */
+}
+
+.spotlight-carousel .carousel-caption p {
+    color: #ddd; /* important: caption text color */
+    font-size: 1rem; /* important: caption text size */
+}
+
+.spotlight-carousel .carousel-control-prev,
+.spotlight-carousel .carousel-control-next {
+    width: 60px; /* important: control size */
+    height: 60px; /* important: control size */
+    top: 50%; /* important: vertical centering */
+    transform: translateY(-50%); /* important: vertical centering */
+    background: rgba(26,60,109,0.7); /* important: control background */
+    border-radius: 50%; /* important: rounded controls */
+    display: flex; /* important: flex for alignment */
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s; /* important: hover transition */
+}
+
+.spotlight-carousel .carousel-control-prev:hover,
+.spotlight-carousel .carousel-control-next:hover {
+    background: rgba(26,60,109,1); /* important: hover effect */
+}
+
+.spotlight-carousel .carousel-control-prev-icon,
+.spotlight-carousel .carousel-control-next-icon {
+    background: none; /* important: remove default background */
+}
+
+.spotlight-carousel .carousel-control-prev-icon::before,
+.spotlight-carousel .carousel-control-next-icon::before {
+    content: '\f053'; /* important: FontAwesome icon */
+    font-family: 'Font Awesome 6 Free'; /* important: correct icon font */
+    font-weight: 900;
+    font-size: 2rem; /* important: icon size */
+    color: #f1c40f; /* important: icon color */
+}
+
+.spotlight-carousel .carousel-control-next-icon::before {
+    content: '\f054'; /* important: next icon override */
+}
+
+/* Ensure only one set of controls is visible */
+.spotlight-carousel .carousel-control-prev:not(:first-child),
+.spotlight-carousel .carousel-control-next:not(:first-child) {
+    display: none; /* important: prevent duplicate controls */
+}
+
+@media (max-width: 768px) {
+    .spotlight-carousel .carousel-item img {
+        height: 300px; /* important: responsive image height */
+    }
+    .spotlight-carousel .carousel-caption h5 {
+        font-size: 1.5rem; /* important: responsive caption heading */
+    }
+    .spotlight-carousel .carousel-caption p {
+        font-size: 0.9rem; /* important: responsive caption text */
+    }
+    .spotlight-section h2 {
+        font-size: 2.2rem; /* important: responsive headline */
+    }
+}
+
+
+/* Programming Languages Section */
+.languages-section {
+    padding: 60px 0;
+    background: #fff;
+}
+.languages-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.language-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+}
+.language-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.language-card img {
+    height: 80px;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+.language-card h3 {
+    font-size: 1.6rem;
+    color: #1a3c6d;
+    margin-bottom: 10px;
+}
+.language-card p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Databases Section */
+.databases-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+}
+.databases-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #f1c40f;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.database-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+}
+.database-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+.database-card img {
+    height: 80px;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+.database-card h3 {
+    font-size: 1.6rem;
+    color: #1a3c6d;
+    margin-bottom: 10px;
+}
+.database-card p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Services Section (Grid) */
+.services-section .service-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.services-section .service-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.services-section .service-card img {
+    border-radius: 15px 15px 0 0;
+    height: 200px;
+    object-fit: cover;
+}
+.services-section .service-card .card-body {
+    padding: 20px;
+    text-align: center;
+}
+.services-section .service-card h5 {
+    font-size: 1.6rem;
+    color: #1a3c6d;
+    margin-bottom: 10px;
+}
+.services-section .service-card p {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+.services-section .service-card .btn {
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    transition: transform 0.3s, background 0.3s;
+}
+.services-section .service-card .btn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+}
+
+/* Why Choose Us Section */
+.why-choose-us-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+.why-choose-us-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.why-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+}
+.why-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.why-card i {
+    color: #f1c40f;
+    margin-bottom: 15px;
+}
+.why-card h3 {
+    font-size: 1.6rem;
+    color: #1a3c6d;
+    margin-bottom: 10px;
+}
+.why-card p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Client Testimonials Section */
+.reviews-section {
+    padding: 60px 0;
+    background: #fff;
+}
+.reviews-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.reviews-carousel .review-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+}
+.reviews-carousel .review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.reviews-carousel .review-card .rating {
+    color: #f1c40f;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.reviews-carousel .review-card .card-text {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+.reviews-carousel .review-card .provider {
+    font-size: 0.9rem;
+    color: #1a3c6d;
+    font-weight: 500;
+}
+
+/* Pricing Section */
+.pricing-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+.pricing-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.pricing-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+}
+.pricing-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.pricing-card h3 {
+    font-size: 1.8rem;
+    color: #1a3c6d;
+    margin-bottom: 10px;
+}
+.pricing-card .price {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.pricing-card ul li {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+.pricing-card .btn {
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    transition: transform 0.3s, background 0.3s;
+}
+.pricing-card .btn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #1a3c6d, #2c3e50);
+    color: #fff;
+}
+.contact-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f1c40f;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.contact-section .lead {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+.contact-section form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.contact-section .form-control {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+.contact-section .btn {
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    width: 100%;
+    transition: transform 0.3s, background 0.3s;
+}
+.contact-section .btn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+}
+.contact-section .contact-info {
+    text-align: center;
+    font-size: 1rem;
+}
+.contact-section .contact-info p {
+    margin-bottom: 10px;
+}
+.contact-section .contact-info .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 60px 0;
+    background: #fff;
+}
+.faq-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.faq-section .accordion-button {
+    font-size: 1.1rem;
+    color: #1a3c6d;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+.faq-section .accordion-button:not(.collapsed) {
+    color: #f1c40f;
+    background: #1a3c6d;
+}
+.faq-section .accordion-body {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+}
+.newsletter-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f1c40f;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.newsletter-section .lead {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.newsletter-section .input-group {
+    max-width: 500px;
+    margin: 0 auto;
+}
+.newsletter-section .form-control {
+    border-radius: 10px 0 0 10px;
+    padding: 10px;
+}
+.newsletter-section .btn {
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    border: none;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 20px;
+    transition: transform 0.3s, background 0.3s;
+}
+.newsletter-section .btn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+}
+
+/* Technologies Section */
+.technologies-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+.technologies-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.tech-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.tech-logo {
+    height: 60px;
+    object-fit: contain;
+    transition: transform 0.3s, filter 0.3s;
+}
+.tech-logo:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+}
+
+/* Trust Indicators Section */
+.trust-section {
+    padding: 60px 0;
+    background: #fff;
+}
+.trust-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a3c6d;
+    animation: pulseText 2s ease-in-out infinite;
+}
+.trust-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.trust-gallery img {
+    height: 60px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+.trust-gallery img:hover {
+    transform: scale(1.2);
+}
+.trust-gallery .badge {
+    font-size: 0.9rem;
+    color: #1a3c6d;
+    background: #f1c40f;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+/* Live Chat Widget */
+.live-chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.chat-toggle {
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.chat-toggle:hover {
+    transform: scale(1.1);
+}
+.chat-content {
+    display: none;
+    background: #fff;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+}
+.chat-content.active {
+    display: block;
+}
+.chat-header {
+    background: linear-gradient(45deg, #1a3c6d, #2c3e50);
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-header h4 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+.chat-header .chat-close {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+.chat-body {
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.chat-body p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+.chat-body .form-control {
+    border-radius: 10px;
+    padding: 8px;
+}
+.chat-body .btn {
+    background: linear-gradient(45deg, #f1c40f, #e67e22);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    width: 100%;
+    transition: transform 0.2s, background 0.3s;
+}
+.chat-body .btn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .languages-section, .databases-section, .services-section, .why-choose-us-section,
+    .reviews-section, .pricing-section, .contact-section,
+    .faq-section, .newsletter-section, .technologies-section,
+    .trust-section {
+        padding: 40px 0;
+    }
+    .language-card, .database-card, .service-card, .why-card, .review-card,
+    .pricing-card {
+        margin-bottom: 20px;
+    }
+    .contact-section form,
+    .newsletter-section .input-group {
+        width: 100%;
+    }
+    .live-chat-widget .chat-content {
+        width: 100vw;
+        right: 0;
+        bottom: 70px;
+        border-radius: 0;
+    }
+}
+/* Services Section */
+.services-section {
+    padding: 60px 0 !important; /* Consistent padding for all screen sizes */
+    background: #1a3c6d !important; /* Dark blue background */
+    color: #fff !important; /* White text for contrast */
+}
+
+/* Container adjustments for centering */
+.services-section .container {
+    max-width: 100% !important; /* Use full width for responsiveness */
+    padding-left: 15px !important; /* Standard padding for smaller screens */
+    padding-right: 15px !important; /* Standard padding for smaller screens */
+    margin-left: auto !important; /* Center container */
+    margin-right: auto !important; /* Center container */
+}
+
+/* Heading and lead text */
+.services-section h2 {
+    font-size: 2.8rem !important; /* Large heading for visibility */
+    text-align: center !important; /* Center heading */
+    margin-bottom: 20px !important; /* Reduced margin for compact layout */
+    color: #f1c40f !important; /* Yellow for contrast against dark blue */
+    animation: pulseText 2s ease-in-out infinite !important; /* Retain animation */
+}
+
+.services-section .lead {
+    font-size: 1.1rem !important; /* Readable lead text */
+    text-align: center !important; /* Center lead text */
+    margin-bottom: 30px !important; /* Space before cards */
+    color: #d3d3d3 !important; /* Light gray for contrast and readability */
+}
+
+/* Row adjustments for centering cards */
+.services-section .row {
+    display: flex !important; /* Use flexbox for centering */
+    flex-wrap: wrap !important; /* Allow wrapping for responsiveness */
+    justify-content: center !important; /* Center cards horizontally */
+    margin-left: 0 !important; /* Remove Bootstrap's negative margins */
+    margin-right: 0 !important; /* Remove Bootstrap's negative margins */
+}
+
+/* Card column adjustments */
+.services-section .col-lg-4.col-md-6.mb-4 {
+    display: flex !important; /* Ensure card fills flex container */
+    justify-content: center !important; /* Center card within column */
+    padding-left: 10px !important; /* Reduced padding for tighter layout */
+    padding-right: 10px !important; /* Reduced padding for tighter layout */
+    margin-bottom: 20px !important; /* Consistent spacing between cards */
+    max-width: 100% !important; /* Prevent overflow on smaller screens */
+}
+
+/* Service card styling */
+.services-section .service-card {
+    background: #ffffff !important; /* White card background for contrast */
+    border-radius: 15px !important; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important; /* Stronger shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s !important; /* Smooth hover effects */
+    width: 100% !important; /* Full width within column */
+    max-width: 320px !important; /* Limit card width for balance */
+    margin: 0 auto !important; /* Center card within column */
+    overflow: hidden !important; /* Prevent image overflow */
+}
+
+/* Hover effect for cards */
+.services-section .service-card:hover {
+    transform: translateY(-10px) rotate(2deg) !important; /* Lift and tilt on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important; /* Enhanced shadow */
+}
+
+/* Card image */
+.services-section .service-card img {
+    border-radius: 15px 15px 0 0 !important; /* Rounded top corners */
+    height: 200px !important; /* Fixed height for consistency */
+    width: 100% !important; /* Full width */
+    object-fit: cover !important; /* Cover image without distortion */
+}
+
+/* Card body */
+.services-section .service-card .card-body {
+    padding: 20px !important; /* Consistent padding */
+    text-align: center !important; /* Center text */
+}
+
+/* Card title */
+.services-section .service-card h5 {
+    font-size: 1.6rem !important; /* Readable title */
+    color: #1a3c6d !important; /* Dark blue for brand consistency */
+    margin-bottom: 10px !important; /* Space below title */
+}
+
+/* Card text */
+.services-section .service-card p {
+    color: #555 !important; /* Dark gray for readability */
+    font-size: 0.9rem !important; /* Readable size */
+    margin-bottom: 15px !important; /* Space before button */
+}
+
+/* Button styling */
+.services-section .service-card .btn {
+    background: linear-gradient(45deg, #f1c40f, #e67e22) !important; /* Gradient background */
+    border: none !important; /* No border */
+    border-radius: 25px !important; /* Rounded button */
+    padding: 10px 25px !important; /* Comfortable padding */
+    transition: transform 0.3s, background 0.3s !important; /* Smooth transitions */
+    color: #fff !important; /* White text */
+}
+
+/* Button hover effect */
+.services-section .service-card .btn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400) !important; /* Darker gradient on hover */
+    transform: translateY(-2px) !important; /* Slight lift */
+}
+
+/* Responsive adjustments for smaller devices */
+@media (max-width: 767.98px) {
+    .services-section {
+        padding: 40px 0 !important; /* Reduced padding for mobile */
+    }
+
+    .services-section .container {
+        padding-left: 10px !important; /* Tighter padding */
+        padding-right: 10px !important; /* Tighter padding */
+    }
+
+    .services-section .row {
+        justify-content: center !important; /* Ensure cards are centered */
+    }
+
+    .services-section .col-lg-4.col-md-6.mb-4 {
+        flex: 0 0 100% !important; /* Full width for cards */
+        max-width: 100% !important; /* Full width */
+        padding-left: 5px !important; /* Minimal padding */
+        padding-right: 5px !important; /* Minimal padding */
+    }
+
+    .services-section .service-card {
+        max-width: 90% !important; /* Slightly narrower for centering */
+        margin: 0 auto !important; /* Center card */
+    }
+
+    .services-section h2 {
+        font-size: 2rem !important; /* Smaller heading */
+    }
+
+    .services-section .lead {
+        font-size: 1rem !important; /* Smaller lead text */
+    }
+}
+
+/* Extra small devices (phones, <576px) */
+@media (max-width: 575.98px) {
+    .services-section .service-card {
+        max-width: 95% !important; /* Maximize usable space */
+    }
+
+    .services-section .service-card img {
+        height: 180px !important; /* Slightly smaller image */
+    }
+
+    .services-section .service-card h5 {
+        font-size: 1.4rem !important; /* Smaller title */
+    }
+
+    .services-section .service-card p {
+        font-size: 0.85rem !important; /* Smaller text */
+    }
+
+    .services-section .service-card .btn {
+        padding: 8px 20px !important; /* Smaller button */
+        font-size: 0.9rem !important; /* Smaller button text */
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Full-Screen Live Background -->
+<div class="live-background">
+    <div class="bg-image active" style="background-image: url('https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+        <div class="overlay"></div>
+    </div>
+    <div class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+        <div class="overlay"></div>
+    </div>
+    <div class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+        <div class="overlay"></div>
+    </div>
+    <div class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+        <div class="overlay"></div>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Wenstech</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
+                        <i class="fas fa-home-alt"></i>
+                        <span class="tooltip-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#servicesGrid1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Our Services">
+                        <i class="fas fa-code"></i>
+                        <span class="tooltip-text">Our Services</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#portfolioSection" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Portfolio">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="tooltip-text">Portfolio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#contactSection" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact Us">
+                        <i class="fas fa-envelope"></i>
+                        <span class="tooltip-text">Contact Us</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header Section with Hero Text -->
+<section class="header-section">
+    <div class="container hero-content">
+        <h1 data-aos="fade-up">Wenstech – Smart Tech, Simple Solutions</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Expert software development and IT services tailored to your needs.</p>
+        <a href="/#contactSection" class="btn btn-primary view-more-btn" data-aos="fade-up" data-aos-delay="300">Get a Quote</a>
+    </div>
+</section>
+
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+    <!-- Floating Sidebar -->
+    <aside class="floating-sidebar" id="floatingSidebar">
+        <div class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="sidebar-close" id="sidebarClose">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section how-it-works" data-aos="fade-left">
+                <h4 id="how-it-works-title" class="typing-text"></h4>
+                <div class="step">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Share Needs">
+                    <p>Share Your Project Needs</p>
+                </div>
+                <div class="step">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Connect">
+                    <p>Connect with Our Developer</p>
+                </div>
+                <div class="step">
+                    <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Develop">
+                    <p>Develop and Deploy Solutions</p>
+                </div>
+            </div>
+            <div class="sidebar-section categories" data-aos="fade-left" data-aos-delay="100">
+                <h4>Top Services</h4>
+                <a href="/#servicesGrid1?type=software">Custom Software Development</a>
+                <a href="/#servicesGrid1?type=it-support">IT Consultancy & Support</a>
+                <a href="/#servicesGrid1?type=cloud">Cloud Setup & Integration</a>
+                <a href="/#servicesGrid1?type=network">Network Setup</a>
+            </div>
+            <div class="sidebar-section featured-projects" data-aos="fade-left" data-aos-delay="200">
+                <h4>Featured Projects</h4>
+                <div id="projectsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="creator">
+                                <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Project 1">
+                                <div>
+                                    <p><strong>E-Commerce Platform</strong></p>
+                                    <p>React & Node.js</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="creator">
+                                <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Project 2">
+                                <div>
+                                    <p><strong>Inventory System</strong></p>
+                                    <p>Python & PostgreSQL</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="creator">
+                                <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Project 3">
+                                <div>
+                                    <p><strong>Cloud Migration</strong></p>
+                                    <p>AWS & Docker</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel" data-bs-slide="prev">
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel" data-bs-slide="next">
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="sidebar-section testimonials" data-aos="fade-left" data-aos-delay="300">
+                <h4>Client Testimonials</h4>
+                <div class="testimonial">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client 1">
+                    <p>"Wenstech delivered a robust app!" - Sarah M.</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client 2">
+                    <p>"Excellent IT support!" - Michael T.</p>
+                </div>
+            </div>
+            <div class="sidebar-section portfolio-previews" data-aos="fade-left" data-aos-delay="400">
+                <h4>Portfolio Previews</h4>
+                <div class="gallery">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Portfolio 1">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Portfolio 2">
+                    <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Portfolio 3">
+                </div>
+            </div>
+            <div class="sidebar-section trust-signals" data-aos="fade-left" data-aos-delay="500">
+                <h4>Trusted By</h4>
+                <div>
+                    <img src="https://www.microsoft.com/en-us/about/assets/images/microsoft-logo.png" alt="Microsoft">
+                    <img src="https://aws.amazon.com/favicon.ico" alt="AWS">
+                </div>
+                <p class="badge">500+ Projects Completed</p>
+                <p class="badge">Certified Developer</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- User Flow Section -->
+    <section class="user-flow-section">
+        <div class="container">
+            <h2 data-aos="fade-up">Start Your Tech Journey</h2>
+            <div class="row">
+                <div class="col-12 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="user-flow-card">
+                        <h3>💻 I'm a Developer</h3>
+                        <p>Need a custom software solution? Hire me to build scalable, efficient applications tailored to your needs.</p>
+                        <a href="/#contactSection" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Timeline Section -->
+    <section class="timeline-section container">
+        <h2 data-aos="fade-up">💼 Your Project Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item left" data-aos="fade-right">
+                <div class="content">
+                    <h4>1. Share Your Needs</h4>
+                    <p>Tell me about your project requirements and goals.</p>
+                </div>
+            </div>
+            <div class="timeline-item right" data-aos="fade-left">
+                <div class="content">
+                    <h4>2. Get a Custom Plan</h4>
+                    <p>Receive a tailored proposal for your project.</p>
+                </div>
+            </div>
+            <div class="timeline-item left" data-aos="fade-right">
+                <div class="content">
+                    <h4>3. Development & Testing</h4>
+                    <p>I build and rigorously test your software solution.</p>
+                </div>
+            </div>
+            <div class="timeline-item right" data-aos="fade-left">
+                <div class="content">
+                    <h4>4. Deploy & Support</h4>
+                    <p>Launch your project with ongoing support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In the Spotlight Section (Portfolio) -->
+    <section class="spotlight-section container" id="portfolioSection">
+        <h2 data-aos="fade-up">🔥 Highlighted Projects</h2>
+        <div id="spotlightCarousel" class="carousel slide spotlight-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="d-block w-100" alt="Project 1">
+                    <div class="carousel-caption">
+                        <h5>E-Commerce Platform</h5>
+                        <p>Built with React, Node.js, and MongoDB.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="d-block w-100" alt="Project 2">
+                    <div class="carousel-caption">
+                        <h5>Inventory Management System</h5>
+                        <p>Developed using Python and PostgreSQL.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="d-block w-100" alt="Project 3">
+                    <div class="carousel-caption">
+                        <h5>Cloud Migration</h5>
+                        <p>Seamless transition to AWS with Docker.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#spotlightCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#spotlightCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Trending Talent Section (Our Team) -->
+    <section class="trending-section" id="teamSection">
+        <div class="container">
+            <h2 data-aos="fade-up">Our Developer</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card trending-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="Developer">
+                        <div class="card-body">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text">Full-Stack Developer</p>
+                            <p>⭐ 4.9 (50 reviews)</p>
+                            <a href="/#aboutUsSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section - Slideshow -->
+    <section class="services-section" id="aboutUsSection">
+        <div class="container">
+            <h2 data-aos="fade-up">About Wenstech</h2>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">Wenstech is a one-developer powerhouse delivering innovative software and IT solutions to businesses worldwide.</p>
+            <div id="aboutUsCarousel" class="carousel slide services-carousel carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card about-card">
+                            <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&q=80" class="card-img-top" alt="Our Mission">
+                            <div class="card-body">
+                                <h5 class="card-title">Our Mission</h5>
+                                <p class="card-text">To provide cutting-edge software and IT solutions that drive business success.</p>
+                                <p class="team-info">Founded in 2020 by a passionate developer.</p>
+                                <a href="/#aboutUsSection" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card about-card">
+                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&q=80" class="card-img-top" alt="Our Values">
+                            <div class="card-body">
+                                <h5 class="card-title">Our Values</h5>
+                                <p class="card-text">Integrity, innovation, and client satisfaction guide every project.</p>
+                                <p class="team-info">Committed to excellence in every line of code.</p>
+                                <a href="/#aboutUsSection" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card about-card">
+                            <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&q=80" class="card-img-top" alt="Our Vision">
+                            <div class="card-body">
+                                <h5 class="card-title">Our Vision</h5>
+                                <p class="card-text">To simplify technology for businesses through innovative solutions.</p>
+                                <p class="team-info">Serving over 500 clients globally.</p>
+                                <a href="/#aboutUsSection" class="btn btn-primary">Our Goals</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#aboutUsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#aboutUsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Languages Section -->
+    <section class="languages-section container">
+        <h2 data-aos="fade-up">Programming Languages I Master</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="language-card">
+                    <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python" class="language-img">
+                    <h3>Python</h3>
+                    <p>Versatile scripting for automation, AI, and web development.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="language-card">
+                    <img src="https://www.javascript.com/images/js-logo.png" alt="JavaScript" class="language-img">
+                    <h3>JavaScript</h3>
+                    <p>Dynamic front-end and back-end web solutions.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="language-card">
+                    <img src="https://www.java.com/images/java-logo.png" alt="Java" class="language-img">
+                    <h3>Java</h3>
+                    <p>Robust applications for enterprise and mobile.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="language-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++" class="language-img">
+                    <h3>C++</h3>
+                    <p>High-performance systems and game development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Databases Section -->
+    <section class="databases-section container">
+        <h2 data-aos="fade-up">Databases I Excel In</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="database-card">
+                    <img src="https://www.mysql.com/common/logos/mysql-logo.svg" alt="MySQL" class="database-img">
+                    <h3>MySQL</h3>
+                    <p>Reliable relational database for web applications.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="database-card">
+                    <img src="https://www.postgresql.org/media/img/PostgreSQL_Logo.1color_1200px.png" alt="PostgreSQL" class="database-img">
+                    <h3>PostgreSQL</h3>
+                    <p>Advanced open-source database for complex queries.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="database-card">
+                    <img src="https://www.mongodb.com/assets/images/global/MongoDB_Logo_RGB_Full_Color.svg" alt="MongoDB" class="database-img">
+                    <h3>MongoDB</h3>
+                    <p>Flexible NoSQL database for scalable apps.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="database-card">
+                    <img src="https://www.sqlite.org/images/sqlite370_banner.gif" alt="SQLite" class="database-img">
+                    <h3>SQLite</h3>
+                    <p>Lightweight database for mobile and embedded systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview Section -->
+    <section class="services-section" id="servicesGrid1">
+        <div class="container">
+            <h2 data-aos="fade-up">Our Services</h2>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">Comprehensive IT and software solutions to power your business.</p>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="Custom Software">
+                        <div class="card-body">
+                            <h5 class="card-title">Custom Software Development</h5>
+                            <p class="card-text">Tailored applications to meet your business needs.</p>
+                            <a href="/#contactSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="IT Consultancy">
+                        <div class="card-body">
+                            <h5 class="card-title">IT Consultancy & Tech Support</h5>
+                            <p class="card-text">Expert guidance and 24/7 support for your IT infrastructure.</p>
+                            <a href="/#contactSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="Cloud Setup">
+                        <div class="card-body">
+                            <h5 class="card-title">Cloud Setup & Integration</h5>
+                            <p class="card-text">Seamless cloud migration with AWS, Azure, or Google Cloud.</p>
+                            <a href="/#contactSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="Network Setup">
+                        <div class="card-body">
+                            <h5 class="card-title">Network Setup & Troubleshooting</h5>
+                            <p class="card-text">Secure and reliable network solutions for your business.</p>
+                            <a href="/#contactSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1516321310764-4b6a6a04f2a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="Software Installation">
+                        <div class="card-body">
+                            <h5 class="card-title">Software Installation & Configuration</h5>
+                            <p class="card-text">Hassle-free setup of software tools and systems.</p>
+                            <a href="/#contactSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="card-img-top" alt="Data Backup">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Backup & Recovery Solutions</h5>
+                            <p class="card-text">Secure your data with robust backup systems.</p>
+                            <a href="/#contactSection" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us-section container">
+        <h2 data-aos="fade-up">Why Choose Wenstech?</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="why-card">
+                    <i class="fas fa-shield-alt fa-3x"></i>
+                    <h3>Reliable</h3>
+                    <p>Dependable solutions with 99.9% uptime guarantees.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="why-card">
+                    <i class="fas fa-dollar-sign fa-3x"></i>
+                    <h3>Affordable</h3>
+                    <p>Competitive pricing without compromising quality.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="why-card">
+                    <i class="fas fa-rocket fa-3x"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>Timely project completion with agile methodologies.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="why-card">
+                    <i class="fas fa-certificate fa-3x"></i>
+                    <h3>Certified Expert</h3>
+                    <p>Certified in AWS, Microsoft, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Testimonials Section -->
+    <!-- <section class="reviews-section container">
+        <h2 data-aos="fade-up">What My Clients Say</h2>
+        <div id="reviewsCarousel" class="carousel slide reviews-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-aos="fade-up">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="review-card">
+                                <div class="rating">⭐⭐⭐⭐⭐</div>
+                                <p class="card-text">"Wenstech built a scalable e-commerce platform that boosted our sales!"</p>
+                                <p class="provider">- Sarah M., Retail CEO</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="review-card">
+                                <div class="rating">⭐⭐⭐⭐⭐</div>
+                                <p class="card-text">"Fixed our network issues overnight with expert support."</p>
+                                <p class="provider">- Michael T., IT Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="review-card">
+                                <div class="rating">⭐⭐⭐⭐⭐</div>
+                                <p class="card-text">"Cloud migration was seamless and efficient."</p>
+                                <p class="provider">- Emily R., Startup Founder</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="review-card">
+                                <div class="rating">⭐⭐⭐⭐⭐</div>
+                                <p class="card-text">"Custom software exceeded our expectations."</p>
+                                <p class="provider">- John K., Logistics Director</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section> -->
+
+    <!-- Pricing Plans Section -->
+    <section class="pricing-section container">
+        <h2 data-aos="fade-up">My Pricing Plans</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <p class="price">$1,000/mo</p>
+                    <ul>
+                        <li>Software Installation & Support</li>
+                        <li>Basic Network Setup</li>
+                        <li>5 Hours IT Consultancy</li>
+                    </ul>
+                    <a href="/#contactSection" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="pricing-card">
+                    <h3>Standard</h3>
+                    <p class="price">$2,500/mo</p>
+                    <ul>
+                        <li>Custom Software Development</li>
+                        <li>Network Troubleshooting</li>
+                        <li>10 Hours IT Consultancy</li>
+                        <li>Data Backup Solutions</li>
+                    </ul>
+                    <a href="/#contactSection" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <p class="price">$5,000/mo</p>
+                    <ul>
+                        <li>Full Software Development</li>
+                        <li>Cloud Integration</li>
+                        <li>24/7 Tech Support</li>
+                        <li>Advanced Security Solutions</li>
+                    </ul>
+                    <a href="/#contactSection" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section container" id="contactSection">
+        <h2 data-aos="fade-up">Get in Touch</h2>
+        <p class="lead" data-aos="fade-up" data-aos-delay="100">Have a project in mind? Let's discuss how I can help!</p>
+        <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div class="contact-info mt-4" data-aos="fade-up" data-aos-delay="300">
+            <p><i class="fas fa-phone"></i> +1 (800) 123-4567</p>
+            <p><i class="fas fa-envelope"></i> contact@wenstech.com</p>
+            <a href="https://wa.me/1234567890" class="btn btn-primary mt-2"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section container">
+        <h2 data-aos="fade-up">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion" data-aos="fade-up" data-aos-delay="100">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faq1">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What is the project timeline?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Timelines vary by project complexity, typically ranging from 2 weeks to 3 months.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faq2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Do you offer ongoing support?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes, I provide 24/7 support and maintenance for all projects.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faq3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        What technologies do you use?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        I specialize in Python, JavaScript, Java, C++, MySQL, PostgreSQL, MongoDB, AWS, and more.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup Section -->
+    <section class="newsletter-section container">
+        <h2 data-aos="fade-up">Stay Updated</h2>
+        <p class="lead" data-aos="fade-up" data-aos-delay="100">Subscribe for tech tips, updates, and exclusive offers.</p>
+        <form id="newsletterForm" data-aos="fade-up" data-aos-delay="200">
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email" required>
+                <button class="btn btn-primary" type="submit">Subscribe</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Technologies Used Section -->
+    <section class="technologies-section container">
+        <h2 data-aos="fade-up">Technologies I Use</h2>
+        <div class="tech-gallery" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python" class="tech-logo">
+            <img src="https://www.javascript.com/images/js-logo.png" alt="JavaScript" class="tech-logo">
+            <img src="https://www.java.com/images/java-logo.png" alt="Java" class="tech-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++" class="tech-logo">
+            <img src="https://www.mysql.com/common/logos/mysql-logo.svg" alt="MySQL" class="tech-logo">
+            <img src="https://www.postgresql.org/media/img/PostgreSQL_Logo.1color_1200px.png" alt="PostgreSQL" class="tech-logo">
+            <img src="https://www.mongodb.com/images" alt="MongoDB" class="tech-logo">
+            <img src="https://www.microsoft.com/images/microsoft-logo.png" alt="Microsoft" class="logo-img">
+            <img src="https://aws.amazon.com/favicon.png" alt="AWS" class="logo-img">
+        </div>
+    </section>
+
+    <!-- Trust Indicators Section -->
+    <section class="trust-section container">
+        <h2 data-aos="fade-up">Trusted by Industry Leaders</h2>
+        <div class="trust-gallery" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://www.microsoft.com/images/microsoft-logo.png" alt="Microsoft">
+            <img src="https://aws.amazon.com/favicon.png" alt="AWS">
+            <img src="https://www.redhat.com/images/logo.png" alt="Red Hat">
+            <p class="badge">5+ Years of Expertise</p>
+            <p class="badge">Certified AWS Developer</p>
+            <p class="badge">500+ Projects Completed</p>
+        </div>
+    </section>
+
+    <!-- Live Chat Widget -->
+    <div class="live-chat-widget" id="chatWidget">
+        <div class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comment"></i>
+        </div>
+        <div class="chat-content" id="chatContent">
+            <div class="chat-header">
+                <h4>Live Chat Support</h4>
+                <i class="fas fa-times chat-close" id="chatClose" aria-label="Close chat"></i>
+            </div>
+            <div class="chat-body">
+                <p>Hello! How can I assist you today?</p>
+                <form id="chatForm">
+                    <input type="text" class="form-control mb-2" placeholder="Type your message" required aria-label="Chat message">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Wenstech</h5>
+                    <p>Your trusted expert for innovative software development and IT services.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#servicesGrid1">Services</a></li>
+                        <li><a href="/#portfolioSection">Portfolio</a></li>
+                        <li><a href="/#contactSection">Contact Us</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Social Media</h5>
+                    <a href="/"><i class="fab fa-facebook fa-2x me-2"></i></a>
+                    <a href="/"><i class="fab fa-instagram fa-2x me-2"></i></a>
+                    <a href="/"><i class="fab fa-linkedin fa-2x"></i></a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>123 Tech Street, Innovation City, TX 75001</p>
+                <p>Mon-Fri: 9 AM - 6 PM | Sat: 10 AM - 4 PM</p>
+                <p>© 2025 Wenstech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- Vanilla Tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS with delay
+window.addEventListener('load', function () {
+    setTimeout(() => {
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    }, 100);
+});
+
+// jQuery document ready
+$(document).ready(function () {
+    // Initialize tooltips
+    $('[data-bs-toggle="tooltip"]').tooltip({ trigger: 'hover', container: 'body' });
+
+    // Typing Animation for How It Works in Sidebar
+    new Typed('#how-it-works-title', {
+        strings: ['How It Works', 'Your Tech Journey', 'Start Simple'],
+        typeSpeed: 60,
+        backSpeed: 40,
+        backDelay: 1500,
+        loop: true
+    });
+
+    // Initialize Tilt Effect on Cards
+    VanillaTilt.init(document.querySelectorAll('.service-card, .trending-card, .user-flow-card, .review-card, .language-card, .database-card, .why-card, .pricing-card'), {
+        max: 12,
+        speed: 400,
+        glare: true,
+        'max-glare': 0.4
+    });
+
+    // Sidebar toggle with improved handling
+    $('#sidebarToggle').on('click', function (e) {
+        e.preventDefault();
+        $('#floatingSidebar').addClass('open');
+        $('.sidebar-content').fadeIn(300);
+    });
+
+    $('#sidebarClose').on('click', function (e) {
+        e.preventDefault();
+        $('#floatingSidebar').removeClass('open');
+        $('.sidebar-content').fadeOut(200);
+    });
+
+    // Ensure sidebar closes when clicking outside on larger screens
+    $(document).on('click', function (e) {
+        if ($(window).width() >= 768 && $('#floatingSidebar').hasClass('open')) {
+            if (!$(e.target).closest('#floatingSidebar').length && !$(e.target).closest('#sidebarToggle').length) {
+                $('#floatingSidebar').removeClass('open');
+                $('.sidebar-content').fadeOut(200);
+            }
+        }
+    });
+});
+
+// Background image transition
+document.addEventListener('DOMContentLoaded', function () {
+    const images = document.querySelectorAll('.bg-image');
+    let currentIndex = 0;
+    const transitionTime = 12000;
+
+    function transitionToNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+    }
+
+    setInterval(transitionToNextImage, transitionTime);
+
+    const directions = ['center', 'top', 'bottom', 'left', 'right', 'top left', 'top right', 'bottom left', 'bottom right'];
+    images.forEach((img, index) => {
+        const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+        img.style.backgroundPosition = randomDirection;
+        const animationName = `kenburns-${index}`;
+        const keyframes = `@keyframes ${animationName} { 0% { transform: scale(1); } 50% { transform: scale(${1 + Math.random() * 0.2}); } 100% { transform: scale(1); } }`;
+        const style = document.createElement('style');
+        style.innerHTML = keyframes;
+        document.head.appendChild(style);
+        img.style.animation = `${animationName} ${transitionTime / 1000}s infinite`;
+    });
+});
+
+// Parallax effect for background
+window.addEventListener('scroll', function () {
+    const liveBackground = document.querySelector('.live-background');
+    const scrollPosition = window.scrollY;
+    liveBackground.style.top = -scrollPosition * 0.5 + 'px';
+});
+
+// Live Chat Widget Toggle
+const chatWidget = document.querySelector('#chatWidget');
+const chatToggle = document.querySelector('#chatToggle');
+const chatContent = document.querySelector('#chatContent');
+const chatClose = document.querySelector('#chatClose');
+
+if (chatToggle && chatContent && chatClose) {
+    chatToggle.addEventListener('click', () => {
+        chatContent.classList.toggle('active');
+    });
+
+    chatClose.addEventListener('click', () => {
+        chatContent.classList.remove('active');
+    });
+
+    // Close chat when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!chatWidget.contains(e.target) && chatContent.classList.contains('active')) {
+            chatContent.classList.remove('active');
+        }
+    });
+}
+
+// Contact Form Submission (Basic Example)
+const contactForm = document.querySelector('#contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+    });
+}
+
+// Newsletter Form Submission (Basic Example)
+const newsletterForm = document.querySelector('#newsletterForm');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for subscribing to our newsletter!');
+        newsletterForm.reset();
+    });
+}
+
+// Chat Form Submission (Basic Example)
+const chatForm = document.querySelector('#chatForm');
+if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Message sent! I will respond shortly.');
+        chatForm.reset();
+    });
+}
+
+// Smooth Scroll for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+        });
+    });
+});
+    </script>
+</body>
+</html>
